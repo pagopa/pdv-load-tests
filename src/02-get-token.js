@@ -13,10 +13,10 @@ export let options = {
 export default function () {
 
     var apiKey = `${__ENV.API_KEY}`
-    var toke =  `${__ENV.TOKEN}`
+    var token =  `${__ENV.TOKEN}`
     var hostName = `${__ENV.HOST_NAME}`
 
-  var url = `https://${hostName}/tokenizer/tokens/${toke}/pii`;
+  var url = `https://${hostName}/tokenizer/tokens/${token}/pii`;
 
   var params = {
     headers: {
@@ -25,6 +25,8 @@ export default function () {
     },
   };
   var r = http.get(url, params);
+
+  console.log(`Status ${r.status}`);
 
   check(r, {
     'status is 200': (r) => r.status === 200,
