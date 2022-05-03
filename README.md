@@ -15,3 +15,10 @@ k6 run -e HOST_NAME=[api.pdv.pagopa.it|api.uat.pdv.pagopa.it] -e API_KEY=<applic
 k6 run -e HOST_NAME=[api.pdv.pagopa.it|api.uat.pdv.pagopa.it] -e API_KEY=<application gateway api key> \
 -e TOKEN=<token id> --vus 10 --duration 60s 02-get-token.js
 ```
+
+## 03 Post token
+
+```bash
+k6 run -e HOST_NAME=[api.pdv.pagopa.it|api.uat.pdv.pagopa.it] -e API_KEY=<application gateway api key> \
+--vus 10 --duration 60s 03-post-token.js
+```
