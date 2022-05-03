@@ -10,27 +10,13 @@ export let options = {
 };
 */
 
-const random = (length = 8) => {
-    // Declare all characters
-    let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-
-    // Pick characers randomly
-    let str = '';
-    for (let i = 0; i < length; i++) {
-        str += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-
-    return str;
-
-};
-
 export default function () {
 
     var apiKey = `${__ENV.API_KEY}`
     var token =  `${__ENV.TOKEN}`
     var hostName = `${__ENV.HOST_NAME}`
 
-  var url = `https://${hostName}/tokenizer/tokens`;
+  var url = `https://${hostName}/tokenizer/tokens/search`;
 
   var params = {
     headers: {
@@ -41,11 +27,11 @@ export default function () {
 
   var payload = JSON.stringify(
     {
-        'pii': random(4)
+        'pii': 'hello'
     }
 );
 
-  var r = http.put(url, payload, params);
+  var r = http.post(url, payload, params);
 
   console.log(`Status ${r.status}`);
 
