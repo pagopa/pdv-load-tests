@@ -74,11 +74,11 @@ export default function () {
 
     console.log(`Status ${r.status}`);
 
-    console.log(`Body ${r.body}`);
+    // console.log(`Body ${r.body}`);
 
     check(r, {
         'status is 200': (r) => r.status === 200,
     });
 
-    sleep(1);
+    sleep(0.5);
 }
