@@ -10,6 +10,8 @@ export let options = {
 };
 */
 
+const apiVersion = 'v1'
+
 const random = (length = 8) => {
     // Declare all characters
     let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
@@ -30,7 +32,7 @@ export default function () {
     var token =  `${__ENV.TOKEN}`
     var hostName = `${__ENV.HOST_NAME}`
 
-  var url = `https://${hostName}/tokenizer/tokens`;
+  var url = `https://${hostName}/tokenizer/${apiVersion}/tokens`;
 
   var params = {
     headers: {

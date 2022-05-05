@@ -4,12 +4,14 @@ import { check } from 'k6';
 import { generateFakeFiscalCode } from './modules/helpers.js';
 import { Faker } from "k6/x/faker"
 
+const apiVersion = 'v1'
+
 export default function () {
 
   var apiKey = `${__ENV.API_KEY}`
   var hostName = `${__ENV.HOST_NAME}`
 
-  var url = `https://${hostName}/user-registry/users`;
+  var url = `https://${hostName}/user-registry/${apiVersion}/users`;
 
   var params = {
     headers: {
