@@ -1,36 +1,51 @@
-import http from 'k6/http';
-import { sleep } from 'k6';
-import { check } from 'k6';
-import { generateFakeFiscalCode } from './modules/helpers.js';
-import { Faker } from "k6/x/faker"
+import http from "k6/http";
+import { sleep } from "k6";
+import { check } from "k6";
+import { generateFakeFiscalCode } from "./modules/helpers.js";
+import { Faker } from "k6/x/faker";
+import { Counter } from "k6/metrics";
 
-const apiVersion = 'v1'
+export let options = {
+  // virtual users
+  vus: 5,
+  // duration: '60s',
+  stages: [
+    { duration: "2m", target: 10 },
+    { duration: "5m", target: 5 }, 
+    { duration: "2m", target: 20 },
+    { duration: "5m", target: 5 },
+  ]
+};
+
+const apiVersion = "v1";
+
+const throttling = new Counter("throttling");
 
 export default function () {
 
-  var apiKey = `${__ENV.API_KEY}`
-  var hostName = `${__ENV.HOST_NAME}`
+  let apiKey = `${__ENV.API_KEY}`;
+  let hostName = `${__ENV.HOST_NAME}`;
 
-  var url = `https://${hostName}/user-registry/${apiVersion}/users`;
+  let url = `https://${hostName}/user-registry/${apiVersion}/users`;
 
-  var params = {
+  let params = {
     headers: {
-      'Content-Type': 'application/json',
-      'x-api-key': apiKey
-    },
+      "Content-Type": "application/json",
+      "x-api-key": apiKey
+    }
   };
 
   // const faker = require('faker');
   let faker = new Faker();
- 
-  var randomEmail = faker.email();
-  var fiscalCode = generateFakeFiscalCode();
-  var randomName = faker.firstName();
-  var randomFamilyName = faker.lastName();
-  
-  
 
-  var payload = JSON.stringify(
+  let randomEmail = faker.email();
+  let fiscalCode = generateFakeFiscalCode();
+  let randomName = faker.firstName();
+  let randomFamilyName = faker.lastName();
+
+
+
+  let payload = JSON.stringify(
     {
         "birthDate": {
           "certification": "NONE",
@@ -72,15 +87,20 @@ export default function () {
       }
     );
 
-    var r = http.patch(url, payload, params);
+    let r = http.patch(url, payload, params);
 
     console.log(`Status ${r.status}`);
 
     // console.log(`Body ${r.body}`);
 
     check(r, {
-        'status is 200': (r) => r.status === 200,
+        "status is 200": (r) => r.status === 200
     });
+
+    if (r.status === 429) {
+      throttling.add(1);
+    }
+
 
     sleep(0.5);
 }
