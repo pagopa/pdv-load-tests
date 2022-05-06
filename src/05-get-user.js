@@ -9,9 +9,9 @@ export let options = {
   vus: 5,
   // duration: '60s',
   stages: [
-    { duration: "2m", target: 10 }, // below normal load
+    { duration: "2m", target: 10 },
     { duration: "5m", target: 5 }, 
-    { duration: "2m", target: 20 }, // normal load
+    { duration: "2m", target: 20 },
     { duration: "5m", target: 5 },
     //{ duration: "2m", target: 300 }, // around the breaking point
     //{ duration: "5m", target: 300 },
