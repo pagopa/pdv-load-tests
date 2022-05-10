@@ -3,11 +3,13 @@ K6 scripts to run load tests for Personal Data Vault api(s)
 
 **Important** some of this load tests use the k6 extension [xk6-faker](https://github.com/szkiba/xk6-faker). Please follow the instructions in github to install it.
 
-## 01 Put token
+## 01 Put tokens
 
 ```bash
-k6 run -e HOST_NAME=[api.tokenizer.pdv.pagopa.it|api.uat.tokenizer.pdv.pagopa.it] -e API_KEY=<application gateway api key> \
---vus 10 --duration 60s 01-put-tokens.js
+k6 run -e HOST_NAME=[api.tokenizer.pdv.pagopa.it|api.uat.tokenizer.pdv.pagopa.it] \
+-e API_KEY=<application gateway api key> \
+-e TOKEN=<token>
+01-put-tokens.js
 ```
 
 ## 02 Get tokens

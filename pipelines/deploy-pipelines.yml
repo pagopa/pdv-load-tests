@@ -50,6 +50,7 @@ steps:
         -e HOST_NAME=${{ parameters.HOST_NAME }} \
         -e API_KEY=${{ parameters.API_KEY }} \
         -e USER_ID=${{ parameters.USER_ID }} \
+        -e TOKEN=${{ parameters.TOKEN }} \
         szkiba/k6-crocus \
         run /src/${{ parameters.SCRIPT }}.js
     displayName: Run k6 ${{ parameters.SCRIPT }} on ${{ parameters.HOST_NAME }}

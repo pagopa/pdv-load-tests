@@ -2,13 +2,17 @@ import http from 'k6/http';
 import { sleep } from 'k6';
 import { check } from 'k6';
 
-/*
 export let options = {
   // virtual users
-  vus: 10,
-  duration: '30s',
+  vus: 5,
+  // duration: '60s',
+  stages: [
+    { duration: "2m", target: 10 },
+    { duration: "5m", target: 5 }, 
+    { duration: "2m", target: 20 },
+    { duration: "5m", target: 5 },
+  ]  
 };
-*/
 
 const apiVersion = 'v1'
 
