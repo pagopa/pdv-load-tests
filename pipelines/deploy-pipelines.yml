@@ -18,14 +18,10 @@ parameters:
     displayName: 'Api gateway api key'
     type: string
     default: ''
-    values: 
-     - ''
   - name: 'USER_ID'
     displayName: '(Optional) user id.'
     type: string
     default: ''
-    values: 
-     - ''
 steps:
   - script: |
       docker pull szkiba/k6-crocus
