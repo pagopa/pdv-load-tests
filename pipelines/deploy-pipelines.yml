@@ -22,6 +22,16 @@ parameters:
     displayName: 'User id.'
     type: string
     default: ''
+  - name: 'SCRIPT'
+    displayName: 'Script name'
+    type: string
+    values:
+      - 01-put-tokens
+      - 02-get-token
+      - 03-post-token
+      - 04-patch-users
+      - 05-get-user
+      - 06-patch-user_by_id
 steps:
   - script: |
       docker pull szkiba/k6-crocus
@@ -33,5 +43,5 @@ steps:
         -e API_KEY=${{ parameters.API_KEY }} \
         -e USER_ID=${{ parameters.USER_ID }} \
         szkiba/k6-crocus \
-        run /src/loadtest.js \
+        run /src/${{ parameters.SCRIPT }}.js \
     displayName: Run k6
