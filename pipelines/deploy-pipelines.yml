@@ -19,7 +19,7 @@ parameters:
     type: string
     default: ''
   - name: 'USER_ID'
-    displayName: '(Optional) user id.'
+    displayName: 'User id.'
     type: string
     default: ''
 steps:
