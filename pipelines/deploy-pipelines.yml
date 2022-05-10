@@ -1,4 +1,5 @@
 # azure-pipelines.yml
+trigger: none
 
 pool:
   vmImage: 'ubuntu-20.04'
@@ -21,7 +22,7 @@ parameters:
   - name: 'USER_ID'
     displayName: 'User id.'
     type: string
-    default: ''
+    default: 'none'
   - name: 'SCRIPT'
     displayName: 'Script name'
     type: string
@@ -46,4 +47,4 @@ steps:
         -e USER_ID=${{ parameters.USER_ID }} \
         szkiba/k6-crocus \
         run /src/${{ parameters.SCRIPT }}.js
-    displayName: Run k6
+    displayName: Run k6 ${{ parameters.SCRIPT }} on ${{ parameters.HOST_NAME }}
