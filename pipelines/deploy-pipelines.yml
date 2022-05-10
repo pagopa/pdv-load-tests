@@ -3,6 +3,7 @@
 pool:
   vmImage: 'ubuntu-20.04'
 
+
 parameters:
   - name: 'HOST_NAME'
     displayName: 'Personal Data Vault host names'
@@ -13,8 +14,18 @@ parameters:
       - 'api.uat.tokenizer.pdv.pagopa.it'
       - 'api.pdv.pagopa.it'
       - 'api.tokenizer.pdv.pagopa.it'
-  
-
+  - name: 'API_KEY'
+    displayName: 'Api gateway api key'
+    type: string
+    default: ''
+    values: 
+     - ''
+  - name: 'USER_ID'
+    displayName: '(Optional) user id.'
+    type: string
+    default: ''
+    values: 
+     - ''
 steps:
   - script: |
       docker pull szkiba/k6-crocus
@@ -22,6 +33,9 @@ steps:
   - script: |
       docker run -i \
         -v `../src`:/src \
+        -e HOST_NAME=${{ parameters.HOST_NAME }} \
+        -e API_KEY=${{ parameters.API_KEY }} \
+        -e USER_ID=${{ parameters.USER_ID }} \
         szkiba/k6-crocus \
         run /src/loadtest.js \
-    displayName: Run k6 cloud
+    displayName: Run k6
