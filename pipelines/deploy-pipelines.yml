@@ -22,7 +22,11 @@ parameters:
   - name: 'USER_ID'
     displayName: 'User id.'
     type: string
-    default: 'none'
+    default: ''
+  - name: 'TOKENS'
+    displayName: 'Token'
+    type: string
+    default: ''
   - name: 'SCRIPT'
     displayName: 'Script name'
     type: string
@@ -33,6 +37,7 @@ parameters:
       - 04-patch-users
       - 05-get-user
       - 06-patch-user_by_id
+
 steps:
   - script: |
       docker pull szkiba/k6-crocus
