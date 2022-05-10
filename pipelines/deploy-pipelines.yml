@@ -37,6 +37,7 @@ steps:
       docker pull szkiba/k6-crocus
     displayName: Pull k6 image
   - script: |
+      pwd
       docker run -i \
         -v $(Pipeline.Workspace)/src:/src \
         -e HOST_NAME=${{ parameters.HOST_NAME }} \
