@@ -1,0 +1,27 @@
+# azure-pipelines.yml
+
+pool:
+  vmImage: 'ubuntu-20.04'
+
+parameters:
+  - name: 'HOST_NAME'
+    displayName: 'Personal Data Vault host names'
+    type: string
+    default: 'api.pdv.pagopa.it'
+    values:
+      - 'api.uat.pdv.pagopa.it'
+      - 'api.uat.tokenizer.pdv.pagopa.it'
+      - 'api.pdv.pagopa.it'
+      - 'api.tokenizer.pdv.pagopa.it'
+  
+
+steps:
+  - script: |
+      docker pull szkiba/k6-crocus
+    displayName: Pull k6 image
+  - script: |
+      docker run -i \
+        -v `../src`:/src \
+        szkiba/k6-crocus \
+        run /src/loadtest.js \
+    displayName: Run k6 cloud
