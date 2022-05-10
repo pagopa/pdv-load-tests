@@ -38,7 +38,7 @@ steps:
     displayName: Pull k6 image
   - script: |
       docker run -i \
-        -v `../src`:/src \
+        -v /src:/src \
         -e HOST_NAME=${{ parameters.HOST_NAME }} \
         -e API_KEY=${{ parameters.API_KEY }} \
         -e USER_ID=${{ parameters.USER_ID }} \
