@@ -40,10 +40,10 @@ steps:
       pwd
       ls -lrt
       docker run -i \
-        -v $(Pipeline.Workspace)/src:/src \
+        -v $(pwd)/src:/src \
         -e HOST_NAME=${{ parameters.HOST_NAME }} \
         -e API_KEY=${{ parameters.API_KEY }} \
         -e USER_ID=${{ parameters.USER_ID }} \
         szkiba/k6-crocus \
-        run /src/${{ parameters.SCRIPT }}.js \
+        run /src/${{ parameters.SCRIPT }}.js
     displayName: Run k6
