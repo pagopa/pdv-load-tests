@@ -7,8 +7,7 @@ K6 scripts to run load tests for Personal Data Vault api(s)
 
 ```bash
 k6 run -e HOST_NAME=[api.tokenizer.pdv.pagopa.it|api.uat.tokenizer.pdv.pagopa.it] \
--e API_KEY=<application gateway api key> \
--e TOKEN=<token>
+-e API_KEY=<application gateway api key>
 01-put-tokens.js
 ```
 

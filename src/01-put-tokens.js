@@ -33,7 +33,6 @@ const random = (length = 8) => {
 export default function () {
 
     var apiKey = `${__ENV.API_KEY}`
-    var token =  `${__ENV.TOKEN}`
     var hostName = `${__ENV.HOST_NAME}`
 
   var url = `https://${hostName}/tokenizer/${apiVersion}/tokens`;
