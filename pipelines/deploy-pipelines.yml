@@ -23,7 +23,7 @@ parameters:
     displayName: 'User id.'
     type: string
     default: ''
-  - name: 'TOKENS'
+  - name: 'TOKEN'
     displayName: 'Token'
     type: string
     default: ''
