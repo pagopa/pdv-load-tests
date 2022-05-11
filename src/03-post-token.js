@@ -18,6 +18,20 @@ export let options = {
 const apiVersion = 'v1'
 const throttling = new Counter('throttling');
 
+const random = (length = 8) => {
+  // Declare all characters
+  let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+
+  // Pick characers randomly
+  let str = '';
+  for (let i = 0; i < length; i++) {
+      str += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+
+  return str;
+
+};
+
 export default function () {
 
     var apiKey = `${__ENV.API_KEY}`
@@ -35,7 +49,7 @@ export default function () {
 
   var payload = JSON.stringify(
     {
-        'pii': 'hello'
+        'pii': random(4)
     }
 );
 
