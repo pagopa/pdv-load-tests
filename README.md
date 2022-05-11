@@ -15,14 +15,14 @@ k6 run -e HOST_NAME=[api.tokenizer.pdv.pagopa.it|api.uat.tokenizer.pdv.pagopa.it
 
 ```bash
 k6 run -e HOST_NAME=[api.tokenizer.pdv.pagopa.it|api.uat.tokenizer.pdv.pagopa.it] -e API_KEY=<application gateway api key> \
--e TOKEN=<token id> --vus 10 --duration 60s 02-get-token.js
+-e TOKEN=<token id> 02-get-token.js
 ```
 
 ## 03 Post token
 
 ```bash
 k6 run -e HOST_NAME=[api.tokenizer.pdv.pagopa.it|api.uat.tokenizer.pdv.pagopa.it] \
--e API_KEY=<application gateway api key>  03-post-token.js
+-e API_KEY=<application gateway api key> 03-post-token.js
 ```
 
 ## 04 Patch users 
