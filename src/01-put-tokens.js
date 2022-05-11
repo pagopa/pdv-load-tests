@@ -1,6 +1,7 @@
 import http from 'k6/http';
 import { sleep } from 'k6';
 import { check } from 'k6';
+import { Counter } from 'k6/metrics';
 
 export let options = {
   // virtual users
@@ -14,7 +15,8 @@ export let options = {
   ]  
 };
 
-const apiVersion = 'v1'
+const apiVersion = 'v1';
+const throttling = new Counter('throttling');
 
 const random = (length = 8) => {
     // Declare all characters
@@ -58,6 +60,10 @@ export default function () {
     'status is 200': (r) => r.status === 200,
   });
 
-  sleep(1);
+  if (r.status === 429) {
+    throttling.add(1);
+  }
+
+  sleep(0.5);
 
 }
