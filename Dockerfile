@@ -5,27 +5,25 @@ ARG DEBIAN_FRONTEND=noninteractive
 #WORKDIR $GOPATH/src/go.k6.io/k6
 
 RUN apt-get update -y; 
-RUN apt-get install git -y; apt-get install golang -y; apt-get install gnupg2 -y
+RUN apt-get install wget -y
 
-# Install k6
-RUN mkdir /root/.gnupg/
-RUN gpg --no-default-keyring --keyring /usr/share/keyrings/k6-archive-keyring.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C5AD17C747E3415A3642D57D77C6C491D6AC1D69
-RUN echo "deb [signed-by=/usr/share/keyrings/k6-archive-keyring.gpg] https://dl.k6.io/deb stable main" | tee /etc/apt/sources.list.d/k6.list
-RUN apt-get update -y
-# RUN apt-get install k6 -y
-RUN go install go.k6.io/k6@v0.37.0
-  
-# install xk6
-RUN CGO_ENABLED=0 
-RUN go install go.k6.io/xk6/cmd/xk6@v0.6.1
+# Install golang
+RUN wget https://go.dev/dl/go1.18.2.linux-amd64.tar.gz
+RUN rm -rf /usr/local/go && tar -C /usr/local -xzf go1.18.2.linux-amd64.tar.gz; rm go1.18.2.linux-amd64.tar.gz
+ENV PATH="/usr/local/go/bin:${PATH}"
 
-# build the image 
-RUN /root/go/bin/xk6 build --output /root/go/bin/k6 --with github.com/szkiba/xk6-faker@v0.2.0
+## # Install xk6
+RUN /usr/local/go/bin/go install go.k6.io/xk6/cmd/xk6@latest
+
+# build k6 with faker extension
+# install faker
+RUN /root/go/bin/xk6 build v0.2.0 --output /root/go/bin/k6 --with github.com/szkiba/xk6-faker
+
 
 FROM alpine:3.15
 RUN apk add --no-cache ca-certificates && \
     adduser -D -u 12345 -g 12345 k6
-COPY --from=builder /go/bin/k6 /usr/bin/k6
+COPY --from=builder /root/go/bin/k6 /usr/bin/k6
 
 USER 12345
 WORKDIR /home/k6
