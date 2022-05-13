@@ -38,7 +38,6 @@ jobs:
           context: ./
           # Note: tags has to be all lower-case
           tags: |
-            ${{ env.IMAGE }}:latest
             ${{ env.IMAGE }}:${{ env.GIT_REF }}
             ${{ env.IMAGE }}:${{ env.GIT_SHA }}
             ${{ env.IMAGE }}:${{ env.BUILD_VER }}
