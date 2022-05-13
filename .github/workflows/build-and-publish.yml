@@ -38,8 +38,6 @@ jobs:
           context: ./
           # Note: tags has to be all lower-case
           tags: |
-            # ghcr.io/pagopa/k6-facker:latest
-            # build on feature branches, push only on main branch
             ${{ env.IMAGE }}:latest
             ${{ env.IMAGE }}:${{ env.GIT_REF }}
             ${{ env.IMAGE }}:${{ env.GIT_SHA }}
