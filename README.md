@@ -1,7 +1,7 @@
 # Person Data Vault load tests
 K6 scripts to run load tests for Personal Data Vault api(s)
 
-**Important** some of this load tests use the k6 extension [xk6-faker](https://github.com/szkiba/xk6-faker). Please follow the instructions in github to install it.
+**Important** some of these load tests use the k6 extension [xk6-faker](https://github.com/szkiba/xk6-faker). Please follow the instructions in github to install it.
 
 ## 01 Put tokens
 
