@@ -1,0 +1,39 @@
+{
+    "birthDate": {
+      "certification": "NONE",
+      "value": "2022-04-29"
+    },
+    "email": {
+      "certification": "NONE",
+      "value": "tony.manero@gmail.com"
+    },
+    "familyName": {
+      "certification": "NONE",
+      "value": "Manero"
+    },
+    "fiscalCode": "DDDDDDDDDDDDD",
+    "name": {
+      "certification": "NONE",
+      "value": "Tony"
+    },
+    "workContacts": {
+      "additionalProp1": {
+        "email": {
+          "certification": "NONE",
+          "value": "tony.manero@pagopa.it"
+        }
+      },
+      "additionalProp2": {
+        "email": {
+          "certification": "NONE",
+          "value": "tony.manero@poste.it"
+        }
+      },
+      "additionalProp3": {
+        "email": {
+          "certification": "NONE",
+          "value": "tony.manero@apple.com"
+        }
+      }
+    }
+  }
