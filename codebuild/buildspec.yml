@@ -3,12 +3,15 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - echo Pull loadimpact/k6 image..
-      - docker pull loadimpact/k6
+      - echo Pull szkiba/k6-crocus image..
+      - docker pull szkiba/k6-crocus
   build:
     commands:
       - echo Run performance test
-      - docker run -i grafana/k6 run - <./src/04-patch-users.js
+      - docker run -i -v $(pwd)/src \
+        -e HOST_NAME=$HOST_NAME \
+        -e API_KEY=$API_KEY \
+        szkiba/k6-crocus run - /src/04-patch-users.js
   post_build:
     commands:
       - echo Performance test complete
