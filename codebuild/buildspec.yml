@@ -8,7 +8,7 @@ phases:
   build:
     commands:
       - echo Run performance test
-      - docker run -i loadimpact/k6 run - ./src/01-put-tokens.js
+      - docker run -i grafana/k6 run - <./src/01-put-tokens.js
   post_build:
     commands:
       - echo Performance test complete

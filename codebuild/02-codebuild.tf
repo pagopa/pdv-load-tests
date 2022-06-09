@@ -57,6 +57,8 @@ resource "aws_codebuild_project" "main" {
     image                       = "aws/codebuild/standard:5.0"
     type                        = "LINUX_CONTAINER"
     image_pull_credentials_type = "CODEBUILD"
+    privileged_mode             = true
+
 
     environment_variable {
       name  = "SOME_KEY1"
@@ -66,7 +68,7 @@ resource "aws_codebuild_project" "main" {
     environment_variable {
       name  = "SOME_KEY2"
       value = "SOME_VALUE2"
-      type  = "PARAMETER_STORE"
+      # type  = "PARAMETER_STORE"
     }
   }
 
