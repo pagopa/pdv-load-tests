@@ -61,12 +61,12 @@ resource "aws_codebuild_project" "main" {
 
 
     environment_variable {
-      name  = "SOME_KEY1"
-      value = "SOME_VALUE1"
+      name  = "HOST_NAME"
+      value = "api.pdv.pagopa.it"
     }
 
     environment_variable {
-      name  = "SOME_KEY2"
+      name  = "API_KEY"
       value = "SOME_VALUE2"
       # type  = "PARAMETER_STORE"
     }
