@@ -1,12 +1,5 @@
 version: 0.2
 
-env:
-  variables:
-    HOST_NAME: api.pdv.pagopa.it
-  parameter-store:
-    TEST_SCRIPT: /CodeBuild/testscript
-    API_KEY: /CodeBuild/apikey
-
 phases:
   pre_build:
     commands:

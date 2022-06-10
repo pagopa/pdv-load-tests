@@ -60,19 +60,21 @@ resource "aws_codebuild_project" "main" {
     image_pull_credentials_type = "CODEBUILD"
     privileged_mode             = true
 
-
-    /*
     environment_variable {
       name  = "HOST_NAME"
       value = "api.pdv.pagopa.it"
     }
-
     environment_variable {
       name  = "API_KEY"
-      value = "SOME_VALUE2"
-      # type  = "PARAMETER_STORE"
+      value = "/CodeBuild/apikey"
+      type  = "PARAMETER_STORE"
     }
-    */
+
+    environment_variable {
+      name  = "TEST_SCRIPT"
+      value = "/CodeBuild/testscript"
+      type  = "PARAMETER_STORE"
+    }
   }
 
   logs_config {
