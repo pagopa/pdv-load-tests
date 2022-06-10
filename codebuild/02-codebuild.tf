@@ -61,6 +61,7 @@ resource "aws_codebuild_project" "main" {
     privileged_mode             = true
 
 
+    /*
     environment_variable {
       name  = "HOST_NAME"
       value = "api.pdv.pagopa.it"
@@ -71,6 +72,7 @@ resource "aws_codebuild_project" "main" {
       value = "SOME_VALUE2"
       # type  = "PARAMETER_STORE"
     }
+    */
   }
 
   logs_config {
