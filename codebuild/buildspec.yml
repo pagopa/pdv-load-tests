@@ -6,8 +6,7 @@ phases:
       - echo Pull ghcr.io/pagopa/pdv-load-tests image..
       - docker pull ghcr.io/pagopa/pdv-load-tests:main
   build:
-    commands:
-      - >-
+    commands: |
         docker run -i -v $(pwd)/src:/src \
         -e HOST_NAME=$HOST_NAME \
         -e API_KEY=$API_KEY \
