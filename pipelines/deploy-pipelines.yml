@@ -40,7 +40,7 @@ parameters:
 
 steps:
   - script: |
-      docker pull szkiba/k6-crocus
+      docker pull ghcr.io/pagopa/pdv-load-tests:main
     displayName: Pull k6 image
   - script: |
       pwd
@@ -51,6 +51,6 @@ steps:
         -e API_KEY=${{ parameters.API_KEY }} \
         -e USER_ID=${{ parameters.USER_ID }} \
         -e TOKEN=${{ parameters.TOKEN }} \
-        szkiba/k6-crocus \
+        ghcr.io/pagopa/pdv-load-tests:main \
         run /src/${{ parameters.SCRIPT }}.js
     displayName: Run k6 ${{ parameters.SCRIPT }} on ${{ parameters.HOST_NAME }}

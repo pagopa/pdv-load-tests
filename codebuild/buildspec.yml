@@ -3,15 +3,15 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - echo Pull szkiba/k6-crocus image..
-      - docker pull szkiba/k6-crocus
+      - echo Pull ghcr.io/pagopa/pdv-load-tests image..
+      - docker pull ghcr.io/pagopa/pdv-load-tests:main
   build:
     commands:
       - echo Run performance test
       - docker run -i -v $(pwd)/src \
         -e HOST_NAME=$HOST_NAME \
         -e API_KEY=$API_KEY \
-        szkiba/k6-crocus run - /src/04-patch-users.js
+        ghcr.io/pagopa/pdv-load-tests:main run - /src/04-patch-users.js
   post_build:
     commands:
       - echo Performance test complete
