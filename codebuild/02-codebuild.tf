@@ -33,7 +33,8 @@ resource "aws_iam_role_policy" "main" {
       "Action": [
         "logs:CreateLogGroup",
         "logs:CreateLogStream",
-        "logs:PutLogEvents"
+        "logs:PutLogEvents",
+        "ssm:GetParameters"
       ]
     }
   ]

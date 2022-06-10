@@ -1,5 +1,9 @@
 version: 0.2
-
+env:
+  variables:
+    JAVA_HOME: "/usr/lib/jvm/java-8-openjdk-amd64"
+  parameter-store:
+    TEST_SCRIPT: /CodeBuild/testscript
 phases:
   pre_build:
     commands:
@@ -10,7 +14,7 @@ phases:
         docker run -i -v $(pwd)/src:/src \
         -e HOST_NAME=$HOST_NAME \
         -e API_KEY=$API_KEY \
-        ghcr.io/pagopa/pdv-load-tests:main run /src/04-patch-users.js
+        ghcr.io/pagopa/pdv-load-tests:main run /src/$TEST_SCRIPT
   post_build:
     commands:
       - echo Performance test complete
