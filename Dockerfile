@@ -38,7 +38,7 @@ COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certifi
 COPY --from=builder /opt/aws/amazon-cloudwatch-agent /opt/aws/amazon-cloudwatch-agent
 COPY codebuild/statsd.json /opt/aws/amazon-cloudwatch-agent/bin/default_linux_config.json
 COPY codebuild/amazon-cloudwatch-agent.json /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json
-ADD start.sh /home/k6
+COPY start.sh /home/k6
 RUN chmod +x /home/k6/start.sh
 # RUN chown -R 12345:12345 /opt/aws/amazon-cloudwatch-agent
 
