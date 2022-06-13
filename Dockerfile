@@ -41,7 +41,7 @@ COPY codebuild/statsd.json /opt/aws/amazon-cloudwatch-agent/bin/default_linux_co
 COPY codebuild/amazon-cloudwatch-agent.json /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json
 ADD start.sh /home/k6
 RUN chmod +x /home/k6/start.sh
-# RUN chown -R 12345:12345 /opt/aws/amazon-cloudwatch-agent
+RUN chown -R 12345:12345 /opt/aws/amazon-cloudwatch-agent
 
 
 USER 12345
