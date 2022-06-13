@@ -41,11 +41,11 @@ COPY --from=builder /tmp /tmp
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 COPY --from=builder /opt/aws/amazon-cloudwatch-agent /opt/aws/amazon-cloudwatch-agent
 COPY codebuild/statsd.json /opt/aws/amazon-cloudwatch-agent/etc/statsd.json
+ADD start.sh /home/k6
+RUN chmod +x /home/k6/start.sh
+
 
 USER 12345
-
-ADD start.sh .
-RUN chmod +x start.sh
 
 ENV RUN_IN_CONTAINER=true
 
