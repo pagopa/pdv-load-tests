@@ -30,8 +30,7 @@ RUN curl -O https://s3.amazonaws.com/amazoncloudwatch-agent/debian/amd64/latest/
 
 
 FROM alpine:3.15
-RUN apk add --no-cache ca-certificates && \
-    adduser -D -u 12345 -g 12345 k6
+RUN apk add --no-cache ca-certificates
 COPY --from=builder /root/go/bin/k6 /usr/bin/k6
 
 COPY --from=builder /tmp /tmp
@@ -41,10 +40,9 @@ COPY codebuild/statsd.json /opt/aws/amazon-cloudwatch-agent/bin/default_linux_co
 COPY codebuild/amazon-cloudwatch-agent.json /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json
 ADD start.sh /home/k6
 RUN chmod +x /home/k6/start.sh
-RUN chown -R 12345:12345 /opt/aws/amazon-cloudwatch-agent
+# RUN chown -R 12345:12345 /opt/aws/amazon-cloudwatch-agent
 
-
-USER 12345
+#USER 12345
 
 ENV RUN_IN_CONTAINER=true
 ENV AWS_REGION=eu-south-1
