@@ -1,0 +1,6 @@
+{
+    "agent": {
+            "run_as_user": "root",
+            "region": "eu-south-1"
+    }
+}
