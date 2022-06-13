@@ -41,11 +41,13 @@ COPY --from=builder /tmp /tmp
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 COPY --from=builder /opt/aws/amazon-cloudwatch-agent /opt/aws/amazon-cloudwatch-agent
 COPY codebuild/statsd.json /opt/aws/amazon-cloudwatch-agent/etc/statsd.json
+ADD start.sh .
+RUN chmod +x start.sh
 
 USER 12345
 
-ENV RUN_IN_CONTAINER="True"
-ENV K6_STATSD_ENABLE_TAGS=true
+ENV RUN_IN_CONTAINER=true
+
 
 WORKDIR /home/k6
-ENTRYPOINT ["k6"]
+ENTRYPOINT [ “/bin/sh”, “start.sh” ]
