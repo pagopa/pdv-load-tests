@@ -26,10 +26,7 @@ RUN apt-get update &&  \
 
 RUN curl -O https://s3.amazonaws.com/amazoncloudwatch-agent/debian/amd64/latest/amazon-cloudwatch-agent.deb && \
     dpkg -i -E amazon-cloudwatch-agent.deb && \
-    rm -rf /tmp/* && \
-    rm -rf /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-config-wizard && \
-    rm -rf /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl && \
-    rm -rf /opt/aws/amazon-cloudwatch-agent/bin/config-downloader
+    rm -rf /tmp/*
 
 
 FROM alpine:3.15
