@@ -51,4 +51,4 @@ ENV RUN_IN_CONTAINER=true
 
 
 WORKDIR /home/k6
-ENTRYPOINT [ “/bin/sh”, “start.sh” ]
+ENTRYPOINT [ "/bin/sh", "start.sh" ]
