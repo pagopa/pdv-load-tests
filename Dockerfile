@@ -47,6 +47,4 @@ RUN chmod +x start.sh
 ENV RUN_IN_CONTAINER=true
 ENV AWS_REGION=eu-south-1
 
-
-WORKDIR /home/k6
 ENTRYPOINT [ "/bin/sh", "start.sh" ]
