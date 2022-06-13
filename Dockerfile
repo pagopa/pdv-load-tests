@@ -40,14 +40,16 @@ COPY --from=builder /root/go/bin/k6 /usr/bin/k6
 COPY --from=builder /tmp /tmp
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 COPY --from=builder /opt/aws/amazon-cloudwatch-agent /opt/aws/amazon-cloudwatch-agent
-COPY codebuild/statsd.json /opt/aws/amazon-cloudwatch-agent/etc/statsd.json
+COPY codebuild/statsd.json /opt/aws/amazon-cloudwatch-agent/bin/default_linux_config.json
 ADD start.sh /home/k6
 RUN chmod +x /home/k6/start.sh
+RUN chown -R 12345:12345 /opt/aws/amazon-cloudwatch-agent
 
 
 USER 12345
 
 ENV RUN_IN_CONTAINER=true
+ENV AWS_REGION=eu-south-1
 
 
 WORKDIR /home/k6
