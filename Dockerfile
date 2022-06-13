@@ -12,15 +12,13 @@ RUN wget https://go.dev/dl/go1.18.2.linux-amd64.tar.gz
 RUN rm -rf /usr/local/go && tar -C /usr/local -xzf go1.18.2.linux-amd64.tar.gz; rm go1.18.2.linux-amd64.tar.gz
 ENV PATH="/usr/local/go/bin:${PATH}"
 
-## # Install xk6
+# Install xk6
 RUN /usr/local/go/bin/go install go.k6.io/xk6/cmd/xk6@latest
 
-# build k6 with faker extension
-# install faker
+## build k6 with faker extension
+## install faker
 RUN /root/go/bin/xk6 build v0.2.0 --output /root/go/bin/k6 --with github.com/szkiba/xk6-faker
 
-# Cloudwatch
-FROM debian:latest as builder_cw
 
 RUN apt-get update &&  \
     apt-get install -y ca-certificates curl && \
@@ -39,9 +37,9 @@ RUN apk add --no-cache ca-certificates && \
     adduser -D -u 12345 -g 12345 k6
 COPY --from=builder /root/go/bin/k6 /usr/bin/k6
 
-COPY --from=builder_cw /tmp /tmp
-COPY --from=builder_cw /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
-COPY --from=builder_cw /opt/aws/amazon-cloudwatch-agent /opt/aws/amazon-cloudwatch-agent
+COPY --from=builder /tmp /tmp
+COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
+COPY --from=builder /opt/aws/amazon-cloudwatch-agent /opt/aws/amazon-cloudwatch-agent
 
 USER 12345
 WORKDIR /home/k6
