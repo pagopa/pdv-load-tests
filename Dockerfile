@@ -19,11 +19,29 @@ RUN /usr/local/go/bin/go install go.k6.io/xk6/cmd/xk6@latest
 # install faker
 RUN /root/go/bin/xk6 build v0.2.0 --output /root/go/bin/k6 --with github.com/szkiba/xk6-faker
 
+# Cloudwatch
+FROM debian:latest as builder_cw
+
+RUN apt-get update &&  \
+    apt-get install -y ca-certificates curl && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN curl -O https://s3.amazonaws.com/amazoncloudwatch-agent/debian/amd64/latest/amazon-cloudwatch-agent.deb && \
+    dpkg -i -E amazon-cloudwatch-agent.deb && \
+    rm -rf /tmp/* && \
+    rm -rf /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-config-wizard && \
+    rm -rf /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl && \
+    rm -rf /opt/aws/amazon-cloudwatch-agent/bin/config-downloader
+
 
 FROM alpine:3.15
 RUN apk add --no-cache ca-certificates && \
     adduser -D -u 12345 -g 12345 k6
 COPY --from=builder /root/go/bin/k6 /usr/bin/k6
+
+COPY --from=builder_cw /tmp /tmp
+COPY --from=builder_cw /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
+COPY --from=builder_cw /opt/aws/amazon-cloudwatch-agent /opt/aws/amazon-cloudwatch-agent
 
 USER 12345
 WORKDIR /home/k6
