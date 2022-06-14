@@ -6,8 +6,8 @@
 		"namespace": "k6.io",
 		"metrics_collected": {
 			"statsd": {
-				"metrics_aggregation_interval": 60,
-				"metrics_collection_interval": 10,
+				"metrics_aggregation_interval": 0,
+				"metrics_collection_interval": 1,
 				"service_address": ":8125"
 			}
 		}
