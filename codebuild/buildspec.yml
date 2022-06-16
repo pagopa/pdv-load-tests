@@ -8,6 +8,7 @@ phases:
       - export AWS_ACCESS_KEY_ID=$(aws sts get-session-token | jq -r .Credentials.AccessKeyId)
       - export AWS_SECRET_ACCESS_KEY=$(aws sts get-session-token | jq -r .Credentials.SecretAccessKey)
       - export AWS_SESSION_TOKEN=$(aws sts get-session-token | jq -r .Credentials.SessionToken)
+      - echo "Session Token >> $AWS_SESSION_TOKEN <<"
   build:
     commands: |
         docker run -i -v $(pwd)/src:/src \
