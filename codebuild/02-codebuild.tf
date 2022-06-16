@@ -1,5 +1,11 @@
+locals {
+  codebuild_role_name = "codebuild"
+}
+
+## Note
+## This  trusted relationship is a bit tricky since it refers itself.
 resource "aws_iam_role" "main" {
-  name = "codebuild"
+  name = local.codebuild_role_name
 
   assume_role_policy = <<EOF
 {
@@ -8,7 +14,10 @@ resource "aws_iam_role" "main" {
     {
       "Effect": "Allow",
       "Principal": {
-        "Service": "codebuild.amazonaws.com"
+        "Service": "codebuild.amazonaws.com",
+        "AWS": [
+					"arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/${local.codebuild_role_name}"
+				]
       },
       "Action": "sts:AssumeRole"
     }
@@ -34,7 +43,8 @@ resource "aws_iam_role_policy" "main" {
         "logs:CreateLogGroup",
         "logs:CreateLogStream",
         "logs:PutLogEvents",
-        "ssm:GetParameters"
+        "ssm:GetParameters",
+        "cloudwatch:PutMetricData"
       ]
     }
   ]
