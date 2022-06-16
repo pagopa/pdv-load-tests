@@ -6,7 +6,7 @@ phases:
       - echo Pull ghcr.io/pagopa/pdv-load-tests image..
       - docker pull ghcr.io/pagopa/pdv-load-tests:setup-codebuild
       - ASSUME_ROLE_ARN="arn:aws:iam::751495842760:role/codebuild"
-      - TEMP_ROLE=$(aws sts assume-role --role-arn $ASSUME_ROLE_ARN --role-session-name test)
+      - TEMP_ROLE=$(aws sts assume-role --role-arn $ASSUME_ROLE_ARN --role-session-name AWSCodeBuild)
       - export TEMP_ROLE
       - export AWS_ACCESS_KEY_ID=$(echo "${TEMP_ROLE}" | jq -r '.Credentials.AccessKeyId')
       - export AWS_SECRET_ACCESS_KEY=$(echo "${TEMP_ROLE}" | jq -r '.Credentials.SecretAccessKey')
