@@ -1,11 +1,7 @@
 # Start cloudwatch agent
 
 mkdir -p /root/.aws
-# echo "[AmazonCloudWatchAgent]" > /root/.aws/credentials
-# echo "aws_access_key_id = $AWS_ACCESS_KEY_ID" >> /root/.aws/credentials
-# echo "aws_secret_access_key = $AWS_SECRET_ACCESS_KEY" >> /root/.aws/credentials
-# echo "aws_session_token = $AWS_SESSION_TOKEN" >> /root/.aws/credentials
-# echo "region = eu-south-1" >> /root/.aws/credentials
+
 
 cat << EOF > /root/.aws/credentials
 [AmazonCloudWatchAgent]
