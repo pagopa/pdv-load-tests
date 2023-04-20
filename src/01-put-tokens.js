@@ -8,9 +8,9 @@ export let options = {
   vus: 300,
   // duration: '60s',
   stages: [
-    { duration: "1m", target: 300 },
-    { duration: "2m", target: 300 }, 
-    { duration: "2m", target: 100 },
+     { duration: "30s", target: 300 },
+     { duration: "5m", target: 300 }, 
+    // { duration: "2m", target: 100 },
     // { duration: "5m", target: 5 },
   ]  
 };
