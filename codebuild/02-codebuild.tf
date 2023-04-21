@@ -88,6 +88,27 @@ resource "aws_codebuild_project" "main" {
       value = "/CodeBuild/testscript"
       type  = "PARAMETER_STORE"
     }
+
+    environment_variable {
+      name  = "TEST_DURATION"
+      value = "/CodeBuild/testduration"
+      type  = "PARAMETER_STORE"
+    }
+    environment_variable {
+      name  = "TEST_RATE"
+      value = "/CodeBuild/testrate"
+      type  = "PARAMETER_STORE"
+    }
+    environment_variable {
+      name  = "TEST_PRE_ALLOCATED_VU"
+      value = "/CodeBuild/testpreallocatedvu"
+      type  = "PARAMETER_STORE"
+    }
+    environment_variable {
+      name  = "TEST_MAX_ALLOWED_VU"
+      value = "/CodeBuild/testmaxallowedvu"
+      type  = "PARAMETER_STORE"
+    }
   }
 
   logs_config {

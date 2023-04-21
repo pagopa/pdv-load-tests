@@ -8,22 +8,20 @@ export const options = {
     contacts: {
       executor: 'constant-arrival-rate',
 
-      // Our test should last 5 minutes in total
-      duration: '5m',
+      // test duration
+      duration: `${__ENV.TEST_DURATION}`,
 
-      // It should start 200 iterations per `timeUnit`. Note that iterations starting points
-      // will be evenly spread across the `timeUnit` period.
-      rate: 200,
+      // test rate
+      rate: `${__ENV.TEST_RATE}`,
 
       // It should start `rate` iterations per second
       timeUnit: '1s',
 
-      // It should preallocate 200 VUs before starting the test
-      preAllocatedVUs: 200,
+      // pre-allocate vu
+      preAllocatedVUs: `${__ENV.TEST_PRE_ALLOCATED_VU}`,
 
-      // It is allowed to spin up to 400 maximum VUs to sustain the defined
-      // constant arrival rate.
-      maxVUs: 400,
+      // max allowed vu
+      maxVUs: `${__ENV.TEST_MAX_ALLOWED_VU}`,
     },
   },
 };
