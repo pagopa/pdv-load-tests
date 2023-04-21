@@ -9,19 +9,19 @@ export const options = {
       executor: 'constant-arrival-rate',
 
       // test duration
-      duration: "5m",
+      duration: '5m',
 
       // test rate
-      rate: 200,
+      rate: 300,
 
       // It should start `rate` iterations per second
       timeUnit: '1s',
 
       // pre-allocate vu
-      preAllocatedVUs: 200,
+      preAllocatedVUs: 300,
 
       // max allowed vu
-      maxVUs: 400,
+      maxVUs: 600,
     },
   },
 };
