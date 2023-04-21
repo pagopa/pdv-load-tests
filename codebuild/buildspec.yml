@@ -19,6 +19,10 @@ phases:
         -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID \
         -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY \
         -e AWS_SESSION_TOKEN=$AWS_SESSION_TOKEN \
+        -e TEST_DURATION=$TEST_DURATION \
+        -e TEST_RATE=$TEST_RATE \
+        -e TEST_PRE_ALLOCATED_VU=$TEST_PRE_ALLOCATED_VU \
+        -e TEST_MAX_ALLOWED_VU=$TEST_MAX_ALLOWED_VU \
         ghcr.io/pagopa/pdv-load-tests:setup-codebuild \
         /src/$TEST_SCRIPT
   post_build:
