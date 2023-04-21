@@ -4,6 +4,8 @@ locals {
 
 ## Note
 ## This  trusted relationship is a bit tricky since it refers itself.
+## It's going to fail the first time: just get rid of the AWS part in the Principal block and add it again
+## in a second shoot.
 resource "aws_iam_role" "main" {
   name = local.codebuild_role_name
 
@@ -104,12 +106,14 @@ resource "aws_codebuild_project" "main" {
       fetch_submodules = false
     }
 
-    buildspec = "codebuild/buildspec.yml"
+    buildspec = templatefile(
+      "buildspec.yml",
+      {
+        account_id = data.aws_caller_identity.current.account_id
+      }
+    )
   }
 
-  source_version = "setup-codebuild"
+  source_version = "main"
 
-  tags = {
-    Environment = "Test"
-  }
 }
