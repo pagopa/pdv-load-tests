@@ -11,19 +11,19 @@ export const options = {
       // Our test should last 5 minutes in total
       duration: '5m',
 
-      // It should start 300 iterations per `timeUnit`. Note that iterations starting points
+      // It should start 100 iterations per `timeUnit`. Note that iterations starting points
       // will be evenly spread across the `timeUnit` period.
-      rate: 300,
+      rate: 100,
 
       // It should start `rate` iterations per second
       timeUnit: '1s',
 
-      // It should preallocate 300 VUs before starting the test
-      preAllocatedVUs: 300,
+      // It should preallocate 100 VUs before starting the test
+      preAllocatedVUs: 100,
 
-      // It is allowed to spin up to 600 maximum VUs to sustain the defined
+      // It is allowed to spin up to 200 maximum VUs to sustain the defined
       // constant arrival rate.
-      maxVUs: 600,
+      maxVUs: 200,
     },
   },
 };
