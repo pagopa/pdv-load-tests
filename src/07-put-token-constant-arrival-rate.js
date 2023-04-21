@@ -9,19 +9,19 @@ export const options = {
       executor: 'constant-arrival-rate',
 
       // test duration
-      duration: `${__ENV.TEST_DURATION}`,
+      duration: String(`${__ENV.TEST_DURATION}`),
 
       // test rate
-      rate: `${__ENV.TEST_RATE}`,
+      rate: parseInt(`${__ENV.TEST_RATE}`),
 
       // It should start `rate` iterations per second
       timeUnit: '1s',
 
       // pre-allocate vu
-      preAllocatedVUs: `${__ENV.TEST_PRE_ALLOCATED_VU}`,
+      preAllocatedVUs: parseInt(`${__ENV.TEST_PRE_ALLOCATED_VU}`),
 
       // max allowed vu
-      maxVUs: `${__ENV.TEST_MAX_ALLOWED_VU}`,
+      maxVUs: parseInt(`${__ENV.TEST_MAX_ALLOWED_VU}`),
     },
   },
 };
