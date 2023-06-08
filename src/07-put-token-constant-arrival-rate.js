@@ -9,7 +9,7 @@ export const options = {
       executor: 'constant-arrival-rate',
 
       // test duration
-      duration: '2m',
+      duration: '10m',
 
       // test rate
       rate: 10,
