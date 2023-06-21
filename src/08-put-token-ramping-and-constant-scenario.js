@@ -5,7 +5,7 @@ import { Counter } from 'k6/metrics';
 export const options = {
   discardResponseBodies: true,
   scenarios: {
-    ramping: {
+    ramping_up: {
       executor: 'ramping-arrival-rate',
 
       // Start iterations per `timeUnit`
@@ -20,15 +20,14 @@ export const options = {
       // max allowed vu
       maxVUs: 600,
 
-
       stages: [
         // Start 50 iterations per `timeUnit` for the first minute.
         { target: 50, duration: '1m' },
 
-        // Linearly ramp-up to starting 100 iterations per `timeUnit` over the following two minutes.
+        // // Linearly ramp-up to starting 100 iterations per `timeUnit` over the following two minutes.
         { target: 100, duration: '2m' },
 
-        // Continue starting 200 iterations per `timeUnit` for the following four minutes.
+        // // Continue starting 300 iterations per `timeUnit` for the following four minutes.
         { target: 300, duration: '4m' }
       ],
     },
@@ -54,8 +53,58 @@ export const options = {
       startTime: '7m',
 
     },
+    ramping_down: {
+      executor: 'ramping-arrival-rate',
+
+      // Start iterations per `timeUnit`
+      startRate: 300,
+
+      // Start `startRate` iterations per seconds
+      timeUnit: '1s',
+
+      // Pre-allocate necessary VUs.
+      preAllocatedVUs: 300,
+
+      // max allowed vu
+      maxVUs: 600,
+      
+      startTime: '12m',
+
+      stages: [
+        // Start 300 iterations per `timeUnit` for four minutes.
+        { target: 300, duration: '4m' },
+
+        // Linearly ramp-down to starting 100 iterations per `timeUnit` over the following two minutes.
+        { target: 100, duration: '2m' },
+
+        // Continue starting 50 iterations per `timeUnit` for the following minute.
+        { target: 50, duration: '1m' }
+      ],
+    },
   },
+  summaryTrendStats: ['avg', 'min', 'med', 'max', 'p(90)', 'p(95)', 'p(99)', 'count'],
+  thresholds: {
+    // all thresholds are fulfilled with dummy values 
+    // in order to display metrics for each scenario
+    http_req_duration: ['max>=0'],
+    checks: ['rate>=0'],
+}
 };
+
+for (let key in options.scenarios) {
+  // Each scenario automatically tags the metrics it generates with its own name
+  let thresholdHttpReq = `http_req_duration{scenario:${key}}`;
+  let thresholdChecks = `checks{scenario:${key}}`;
+  // Check to prevent us from overwriting a threshold that already exists
+  if (!options.thresholds[thresholdHttpReq]) {
+      options.thresholds[thresholdHttpReq] = [];
+  }
+  if (!options.thresholds[thresholdChecks]) {
+    options.thresholds[thresholdChecks] = [];
+}
+  // uncomment this if you want to override the default threshold
+  // options.thresholds[thresholdHttpReq].push('max>=0');
+}
 
 const apiVersion = 'v1';
 const throttling = new Counter('throttling');
