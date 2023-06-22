@@ -27,15 +27,15 @@ export const options = {
         // // Linearly ramp-up to starting 100 iterations per `timeUnit` over the following two minutes.
         { target: 100, duration: '2m' },
 
-        // // Continue starting 300 iterations per `timeUnit` for the following four minutes.
-        { target: 300, duration: '4m' }
+        // // Continue starting 300 iterations per `timeUnit` for the following two minutes.
+        { target: 300, duration: '2m' }
       ],
     },
     constant: {
       executor: 'constant-arrival-rate',
 
       // test duration
-      duration: '5m',
+      duration: '3m',
 
       // test rate
       rate: 300,
@@ -50,7 +50,7 @@ export const options = {
       maxVUs: 600,
 
       // start time calculated on ramping scenarios termination time
-      startTime: '7m',
+      startTime: '5m',
 
     },
     ramping_down: {
@@ -68,11 +68,11 @@ export const options = {
       // max allowed vu
       maxVUs: 600,
       
-      startTime: '12m',
+      startTime: '8m',
 
       stages: [
         // Start 300 iterations per `timeUnit` for four minutes.
-        { target: 300, duration: '4m' },
+        { target: 300, duration: '1m' }, //TODO consider to set duration to 1 minute
 
         // Linearly ramp-down to starting 100 iterations per `timeUnit` over the following two minutes.
         { target: 100, duration: '2m' },
