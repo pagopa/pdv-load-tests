@@ -72,7 +72,7 @@ export const options = {
 
       stages: [
         // Start 300 iterations per `timeUnit` for four minutes.
-        { target: 300, duration: '1m' }, //TODO consider to set duration to 1 minute
+        { target: 300, duration: '1m' },
 
         // Linearly ramp-down to starting 100 iterations per `timeUnit` over the following two minutes.
         { target: 100, duration: '2m' },
@@ -145,14 +145,13 @@ export default function () {
 
   var r = http.put(url, payload, params);
 
-  console.log(`Status ${r.status}`);
-
   check(r, {
     'status is 200': (r) => r.status === 200,
   });
 
   if (r.status === 429) {
     throttling.add(1);
+    console.log(`Status ${r.status}`);
   }
 
 }
