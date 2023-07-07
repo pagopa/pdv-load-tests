@@ -55,10 +55,9 @@ const throttling = new Counter('throttling');
 export default function () {
 
   var apiKey = `${__ENV.API_KEY}`
-  var id =  `${__ENV.USER_ID}`
   var hostName = `${__ENV.HOST_NAME}`
 
-var url = `https://${hostName}/user-registry/${apiVersion}/users/${id}?fl=familyName&fl=name&fl=fiscalCode`;
+var url = `https://${hostName}/user-registry/${apiVersion}/users/7aedcb66-e64a-445e-910d-7270ce9487b1?fl=familyName&fl=name&fl=fiscalCode`;
 
 var params = {
   headers: {
