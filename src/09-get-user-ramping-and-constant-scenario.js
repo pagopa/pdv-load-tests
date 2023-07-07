@@ -5,14 +5,40 @@ import { Counter } from 'k6/metrics';
 export const options = {
   discardResponseBodies: true,
   scenarios: {
+    ramping_up: {
+      executor: 'ramping-arrival-rate',
+
+      // Start iterations per `timeUnit`
+      startRate: 10,
+
+      // Start `startRate` iterations per seconds
+      timeUnit: '1s',
+
+      // Pre-allocate necessary VUs.
+      preAllocatedVUs: 300,
+
+      // max allowed vu
+      maxVUs: 600,
+
+      stages: [
+        // Start 50 iterations per `timeUnit` for the first minute.
+        { target: 20, duration: '2m' },
+
+        // // Linearly ramp-up to starting 100 iterations per `timeUnit` over the following two minutes.
+        { target: 30, duration: '3m' },
+
+        // // Continue starting 300 iterations per `timeUnit` for the following two minutes.
+        { target: 50, duration: '4m' }
+      ],
+    },
     constant: {
       executor: 'constant-arrival-rate',
 
       // test duration
-      duration: '1m',
+      duration: '5m',
 
       // test rate
-      rate: 10,
+      rate: 50,
 
       // It should start `rate` iterations per second
       timeUnit: '1s',
@@ -23,6 +49,37 @@ export const options = {
       // max allowed vu
       maxVUs: 600,
 
+      // start time calculated on ramping scenarios termination time
+      startTime: '9m',
+
+    },
+    ramping_down: {
+      executor: 'ramping-arrival-rate',
+
+      // Start iterations per `timeUnit`
+      startRate: 50,
+
+      // Start `startRate` iterations per seconds
+      timeUnit: '1s',
+
+      // Pre-allocate necessary VUs.
+      preAllocatedVUs: 300,
+
+      // max allowed vu
+      maxVUs: 600,
+      
+      startTime: '14m',
+
+      stages: [
+        // Start 300 iterations per `timeUnit` for four minutes.
+        { target: 30, duration: '4m' },
+
+        // Linearly ramp-down to starting 100 iterations per `timeUnit` over the following two minutes.
+        { target: 20, duration: '3m' },
+
+        // Continue starting 50 iterations per `timeUnit` for the following minute.
+        { target: 10, duration: '2m' }
+      ],
     },
   },
   summaryTrendStats: ['avg', 'min', 'med', 'max', 'p(90)', 'p(95)', 'p(99)', 'count'],
@@ -71,13 +128,8 @@ check(r, {
   'status is 200': (r) => r.status === 200,
 });
 
-
 if (r.status === 429) {
   throttling.add(1);
-  console.log(`Status ${r.status}`);
-}
-
-if (r.status != 200) {
   console.log(`Status ${r.status}`);
 }
 
