@@ -9,7 +9,7 @@ export const options = {
       executor: 'ramping-arrival-rate',
 
       // Start iterations per `timeUnit`
-      startRate: 10,
+      startRate: 50,
 
       // Start `startRate` iterations per seconds
       timeUnit: '1s',
@@ -22,13 +22,13 @@ export const options = {
 
       stages: [
         // Start 50 iterations per `timeUnit` for the first minute.
-        { target: 20, duration: '2m' },
+        { target: 50, duration: '2m' },
 
         // // Linearly ramp-up to starting 100 iterations per `timeUnit` over the following two minutes.
-        { target: 30, duration: '3m' },
+        { target: 100, duration: '3m' },
 
         // // Continue starting 300 iterations per `timeUnit` for the following two minutes.
-        { target: 50, duration: '4m' }
+        { target: 300, duration: '4m' }
       ],
     },
     constant: {
@@ -38,7 +38,7 @@ export const options = {
       duration: '5m',
 
       // test rate
-      rate: 50,
+      rate: 300,
 
       // It should start `rate` iterations per second
       timeUnit: '1s',
@@ -57,7 +57,7 @@ export const options = {
       executor: 'ramping-arrival-rate',
 
       // Start iterations per `timeUnit`
-      startRate: 50,
+      startRate: 300,
 
       // Start `startRate` iterations per seconds
       timeUnit: '1s',
@@ -72,13 +72,13 @@ export const options = {
 
       stages: [
         // Start 300 iterations per `timeUnit` for four minutes.
-        { target: 30, duration: '4m' },
+        { target: 300, duration: '4m' },
 
         // Linearly ramp-down to starting 100 iterations per `timeUnit` over the following two minutes.
-        { target: 20, duration: '3m' },
+        { target: 100, duration: '3m' },
 
         // Continue starting 50 iterations per `timeUnit` for the following minute.
-        { target: 10, duration: '2m' }
+        { target: 50, duration: '2m' }
       ],
     },
   },
