@@ -112,7 +112,7 @@ const throttling = new Counter('throttling');
 export default function () {
 
   var apiKey = `${__ENV.API_KEY}`
-  var token =  `${__ENV.TOKEN}`
+  var token =  '0b1ecd6d-ade4-4917-92e2-d29579f65a86'
   var hostName = `${__ENV.HOST_NAME}`
 
 var url = `https://${hostName}/tokenizer/${apiVersion}/tokens/${token}/pii`;
