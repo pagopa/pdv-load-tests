@@ -28,23 +28,23 @@ export const options = {
         { target: 70, duration: '1m' },
 
         // // Continue starting 300 iterations per `timeUnit` for the following two minutes.
-        { target: 150, duration: '2m' }
+        { target: 200, duration: '2m' }
       ],
     },
     constant: {
       executor: 'constant-arrival-rate',
 
       // test duration
-      duration: '2m',
+      duration: '4m',
 
       // test rate
-      rate: 150,
+      rate: 200,
 
       // It should start `rate` iterations per second
       timeUnit: '1s',
 
       // pre-allocate vu
-      preAllocatedVUs: 150,
+      preAllocatedVUs: 200,
 
       // max allowed vu
       maxVUs: 300,
@@ -57,22 +57,22 @@ export const options = {
       executor: 'ramping-arrival-rate',
 
       // Start iterations per `timeUnit`
-      startRate: 150,
+      startRate: 200,
 
       // Start `startRate` iterations per seconds
       timeUnit: '1s',
 
       // Pre-allocate necessary VUs.
-      preAllocatedVUs: 150,
+      preAllocatedVUs: 200,
 
       // max allowed vu
       maxVUs: 300,
       
-      startTime: '6m',
+      startTime: '8m',
 
       stages: [
         // Start 300 iterations per `timeUnit` for four minutes.
-        { target: 150, duration: '1m' },
+        { target: 200, duration: '1m' },
 
         // Linearly ramp-down to starting 100 iterations per `timeUnit` over the following two minutes.
         { target: 70, duration: '1m' },
