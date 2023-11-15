@@ -9,7 +9,7 @@ export const options = {
       executor: 'ramping-arrival-rate',
 
       // Start iterations per `timeUnit`
-      startRate: 50,
+      startRate: 25,
 
       // Start `startRate` iterations per seconds
       timeUnit: '1s',
@@ -22,13 +22,13 @@ export const options = {
 
       stages: [
         // Start 50 iterations per `timeUnit` for the first minute.
-        { target: 50, duration: '1m' },
+        { target: 25, duration: '1m' },
 
         // // Linearly ramp-up to starting 100 iterations per `timeUnit` over the following two minutes.
-        { target: 100, duration: '2m' },
+        { target: 50, duration: '2m' },
 
         // // Continue starting 300 iterations per `timeUnit` for the following two minutes.
-        { target: 300, duration: '2m' }
+        { target: 150, duration: '2m' }
       ],
     },
     constant: {
@@ -38,7 +38,7 @@ export const options = {
       duration: '3m',
 
       // test rate
-      rate: 300,
+      rate: 150,
 
       // It should start `rate` iterations per second
       timeUnit: '1s',
@@ -57,7 +57,7 @@ export const options = {
       executor: 'ramping-arrival-rate',
 
       // Start iterations per `timeUnit`
-      startRate: 300,
+      startRate: 150,
 
       // Start `startRate` iterations per seconds
       timeUnit: '1s',
@@ -72,13 +72,13 @@ export const options = {
 
       stages: [
         // Start 300 iterations per `timeUnit` for four minutes.
-        { target: 300, duration: '1m' },
+        { target: 150, duration: '1m' },
 
         // Linearly ramp-down to starting 100 iterations per `timeUnit` over the following two minutes.
-        { target: 100, duration: '2m' },
+        { target: 50, duration: '2m' },
 
         // Continue starting 50 iterations per `timeUnit` for the following minute.
-        { target: 50, duration: '1m' }
+        { target: 25, duration: '1m' }
       ],
     },
   },
@@ -144,14 +144,23 @@ export default function () {
 );
 
   var r = http.put(url, payload, params);
+  var r1 = http.put(url, payload, params);
 
   check(r, {
     'status is 200': (r) => r.status === 200,
   });
 
+  check(r1, {
+    'status is 200': (r) => r1.status === 200,
+  });
+
   if (r.status === 429) {
     throttling.add(1);
     console.log(`Status ${r.status}`);
+  }
+  if (r1.status === 429) {
+    throttling.add(1);
+    console.log(`Status ${r1.status}`);
   }
 
 }
