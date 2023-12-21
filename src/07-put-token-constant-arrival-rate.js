@@ -12,16 +12,16 @@ export const options = {
       duration: '5m',
 
       // test rate
-      rate: 300,
+      rate: 600,
 
       // It should start `rate` iterations per second
       timeUnit: '1s',
 
       // pre-allocate vu
-      preAllocatedVUs: 300,
+      preAllocatedVUs: 600,
 
       // max allowed vu
-      maxVUs: 600,
+      maxVUs: 1200,
     },
   },
 };
