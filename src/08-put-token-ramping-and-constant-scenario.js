@@ -15,10 +15,10 @@ export const options = {
       timeUnit: '1s',
 
       // Pre-allocate necessary VUs.
-      preAllocatedVUs: 2000,
+      preAllocatedVUs: 4000,
 
       // max allowed vu
-      maxVUs: 8000,
+      maxVUs: 16000,
 
       stages: [
         // Start 300 iterations per `timeUnit` for the first minute.
@@ -44,10 +44,10 @@ export const options = {
       timeUnit: '1s',
 
       // pre-allocate vu
-      preAllocatedVUs: 2000,
+      preAllocatedVUs: 4000,
 
       // max allowed vu
-      maxVUs: 8000,
+      maxVUs: 16000,
 
       // start time calculated on ramping scenarios termination time
       startTime: '5m',
@@ -66,7 +66,7 @@ export const options = {
       preAllocatedVUs: 4000,
 
       // max allowed vu
-      maxVUs: 8000,
+      maxVUs: 16000,
       
       startTime: '8m',
 
