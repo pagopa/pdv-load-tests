@@ -9,26 +9,26 @@ export const options = {
       executor: 'ramping-arrival-rate',
 
       // Start iterations per `timeUnit`
-      startRate: 100,
+      startRate: 300,
 
       // Start `startRate` iterations per seconds
       timeUnit: '1s',
 
       // Pre-allocate necessary VUs.
-      preAllocatedVUs: 600,
+      preAllocatedVUs: 2000,
 
       // max allowed vu
-      maxVUs: 1200,
+      maxVUs: 8000,
 
       stages: [
-        // Start 50 iterations per `timeUnit` for the first minute.
-        { target: 100, duration: '1m' },
+        // Start 300 iterations per `timeUnit` for the first minute.
+        { target: 600, duration: '1m' },
 
-        // // Linearly ramp-up to starting 100 iterations per `timeUnit` over the following two minutes.
-        { target: 200, duration: '2m' },
+        // // Linearly ramp-up to starting 1400 iterations per `timeUnit` over the following two minutes.
+        { target: 1400, duration: '2m' },
 
-        // // Continue starting 300 iterations per `timeUnit` for the following two minutes.
-        { target: 600, duration: '2m' }
+        // // Continue starting 2000 iterations per `timeUnit` for the following two minutes.
+        { target: 2000, duration: '2m' }
       ],
     },
     constant: {
@@ -38,16 +38,16 @@ export const options = {
       duration: '3m',
 
       // test rate
-      rate: 600,
+      rate: 2000,
 
       // It should start `rate` iterations per second
       timeUnit: '1s',
 
       // pre-allocate vu
-      preAllocatedVUs: 600,
+      preAllocatedVUs: 2000,
 
       // max allowed vu
-      maxVUs: 1200,
+      maxVUs: 8000,
 
       // start time calculated on ramping scenarios termination time
       startTime: '5m',
@@ -57,28 +57,28 @@ export const options = {
       executor: 'ramping-arrival-rate',
 
       // Start iterations per `timeUnit`
-      startRate: 600,
+      startRate: 2000,
 
       // Start `startRate` iterations per seconds
       timeUnit: '1s',
 
       // Pre-allocate necessary VUs.
-      preAllocatedVUs: 600,
+      preAllocatedVUs: 4000,
 
       // max allowed vu
-      maxVUs: 1200,
+      maxVUs: 8000,
       
       startTime: '8m',
 
       stages: [
-        // Start 300 iterations per `timeUnit` for four minutes.
-        { target: 600, duration: '1m' },
+        // Start 2000 iterations per `timeUnit` for four minutes.
+        { target: 1400, duration: '1m' },
 
-        // Linearly ramp-down to starting 100 iterations per `timeUnit` over the following two minutes.
-        { target: 200, duration: '2m' },
+        // Linearly ramp-down to starting 600 iterations per `timeUnit` over the following two minutes.
+        { target: 600, duration: '2m' },
 
-        // Continue starting 50 iterations per `timeUnit` for the following minute.
-        { target: 100, duration: '1m' }
+        // Continue starting 300 iterations per `timeUnit` for the following minute.
+        { target: 300, duration: '1m' }
       ],
     },
   },
